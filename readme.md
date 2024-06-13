@@ -1,7 +1,7 @@
 # Game Reviews Website
 
 ## Overview
-The Game Reviews Website is a platform designed for gaming enthusiasts to explore their favorite games, read detailed descriptions, create reviews, and engage in discussions about the gaming industry. Built using React.js for the frontend and Django with Django Rest Framework for the backend, the website offers a seamless user experience with dynamic features and responsive design.
+The Game Reviews Website is a platform designed for gaming enthusiasts to explore their favorite games, add exciting games to their playlist for future reviews, read detailed descriptions, create reviews, and engage in discussions about the gaming industry. Built using React.js for the frontend and Django with Django Rest Framework for the backend, the website offers a seamless user experience with dynamic features and responsive design.
 
 ## Distinctiveness and Complexity
 ### Why it Satisfies the Requirements
