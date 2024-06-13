@@ -14,6 +14,10 @@ export const Title = styled.h1`
   font-weight: semibold;
   text-transform: uppercase;
   font-size: 24px;
+
+  @media screen and (max-width: 480px) {
+    font-size: 20px;
+  }
 `;
 
 export const GameListWrapper = styled(motion.div)`
@@ -69,16 +73,30 @@ export const GameItem = styled(LinkR)`
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   }
+  @media screen and (max-width: 480px) {
+    height: 250px;
+    width: 200px;
+  }
 `;
 
 export const GameImage = styled.img`
   height: 250px;
   width: 250px;
   object-fit: cover;
+
+  @media screen and (max-width: 480px) {
+    height: 200px;
+    width: 200px;
+  }
 `;
 
 export const GameTitle = styled.div`
   margin-top: 10px;
   font-size: 16px;
   color: white;
+
+  @media screen and (max-width: 480px) {
+    font-size: 14px;
+    margin-top: 0;
+  }
 `;

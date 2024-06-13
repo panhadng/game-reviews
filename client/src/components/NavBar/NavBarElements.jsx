@@ -17,7 +17,7 @@ export const Nav = styled.nav`
 export const NavBarContainer = styled.nav`
   display: flex;
   justify-content: space-between;
-  height: 80px;
+  height: 100%;
   z-index: 1;
   width: 100%;
   padding: 0 24px;
@@ -35,6 +35,9 @@ export const NavLogo = styled(LinkR)`
   margin-left: 24px;
   font-weight: bold;
   text-decoration: none;
+  @media screen and (max-width: 480px) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const LogoImage = styled.img`
@@ -120,9 +123,9 @@ export const NavBtnLink = styled(LinkR)`
 export const ProfileButton = styled.button`
   border-radius: 50px;
   background: darkred;
+  color: white;
   white-space: nowrap;
   padding: 10px 22px;
-  color: white;
   font-size: 16px;
   outline: none;
   border: none;
@@ -135,18 +138,31 @@ export const ProfileButton = styled.button`
     background: white;
     color: red;
   }
+  @media screen and (max-width: 480px) {
+    font-size: 20px;
+    padding: 15px 33px;
+    &:hover {
+      background: darkred;
+      color: white;
+    }
+  }
 `;
 
 export const ProfileDropdown = styled.div`
   position: absolute;
   top: 50px;
-  width: 100px;
+  width: 150px;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+
+  @media screen and (max-width: 480px) {
+    margin-left: -10px;
+    margin-top: 10px;
+  }
 `;
 
 export const ProfileDropdownButton = styled.button`
@@ -158,10 +174,14 @@ export const ProfileDropdownButton = styled.button`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  width: 100%;
   &:hover {
     background-color: #f0f0f0;
   }
   &:not(:last-child) {
     border-bottom: 1px solid #ddd;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 16px;
   }
 `;

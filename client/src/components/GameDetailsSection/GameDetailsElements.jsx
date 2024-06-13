@@ -9,6 +9,7 @@ export const GameDetailsContainer = styled.div`
   height: auto;
   width: 100%;
   display: flex;
+  overflow-x: hidden;
 `;
 export const GameDetailsWrapper = styled.div`
   display: flex;
@@ -16,6 +17,23 @@ export const GameDetailsWrapper = styled.div`
   width: 100%;
   align-items: center;
   margin-bottom: 40px;
+`;
+
+export const GameDetailsContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+  margin-bottom: 80px;
+
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+  }
+
+  @media screen and (max-width: 480px) {
+    margin-bottom: 0;
+  }
 `;
 
 export const ImageBox = styled.div`
@@ -46,6 +64,10 @@ export const GameDetailsImage = styled.img`
   height: 300px;
   width: 300px;
   object-fit: cover;
+  @media screen and (max-width: 480px) {
+    height: 300px;
+    width: 300px;
+  }
 `;
 
 export const Headings = styled.h1`
@@ -53,6 +75,9 @@ export const Headings = styled.h1`
   text-transform: uppercase;
   display: flex;
   justify-content: space-between;
+  @media screen and (max-width: 480px) {
+    font-size: 24px;
+  }
 `;
 
 export const IgdbButton = styled(LinkR)`
@@ -72,6 +97,11 @@ export const IgdbButton = styled(LinkR)`
     color: darkred;
     background-color: white;
   }
+  @media screen and (max-width: 480px) {
+    font-size: 12px;
+    padding: 10px;
+    height: auto;
+  }
 `;
 
 export const Description = styled.p`
@@ -90,19 +120,20 @@ export const Overview = styled.div`
 export const OverviewTitle = styled.h2`
   border-bottom: 1px solid #ddd;
   margin-bottom: 10px;
+
+  @media screen and (max-width: 480px) {
+    font-size: 20px;
+  }
 `;
 
 export const GameDetailsInfo = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 40px;
-`;
 
-export const GameDetailsContent = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 60%;
-  margin-bottom: 80px;
+  @media screen and (max-width: 480px) {
+    margin: 60px 0;
+  }
 `;
 
 export const GridTitle = styled.div`
@@ -111,12 +142,19 @@ export const GridTitle = styled.div`
   h2 {
     border-bottom: 1px solid #ddd;
   }
+  @media screen and (max-width: 480px) {
+    width: 90%;
+    font-size: 14px;
+  }
 `;
 
 export const ReviewsSection = styled.div`
   color: white;
   width: 80%;
   margin-bottom: 40px;
+  @media screen and (max-width: 480px) {
+    width: 90%;
+  }
 `;
 
 export const Review = styled.div`

@@ -17,7 +17,11 @@ The project stands out by offering a unique combination of features tailored spe
 - **Styled Components**: Utilized for styling in React components, promoting encapsulation and reusability. Styled Components support dynamic styling based on props, enhancing the user experience with responsive design.
 - **React Scroll**: Integrated to enable smooth scrolling within the application, improving navigation and user engagement.
 
-### File Structure
+## Custom Files
+
+The `src` folder in the client directory contains the core of the custom files created for this project. This includes the `components` and `pages` folders, where custom React components and page structures are defined and styled, encapsulating the functionality and aesthetics of the Game Reviews Website.
+
+## File Structure
 
 - **Client**: Contains React components organized into `components` and `pages` folders. Components are reusable, inheritable, and separated to improve scalability. Pages utilize multiple components to compose the user interface effectively.
 
@@ -63,3 +67,7 @@ To run the application locally:
 
 - **Testing**: Describe any testing methodologies employed to ensure the reliability and stability of the application.
 - **Future Enhancements**: Outline potential improvements or features that could be added to further enhance the project.
+
+## Mobile Responsiveness
+
+The Game Reviews Website is designed to be mobile responsive, ensuring a seamless user experience across various devices and screen sizes. Styled Components and responsive design principles are employed to achieve this adaptability, enhancing accessibility and engagement for all users.

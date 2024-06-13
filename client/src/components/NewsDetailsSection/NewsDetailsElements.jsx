@@ -8,6 +8,7 @@ export const NewsDetailsContainer = styled.div`
   height: auto;
   width: 100%;
   display: flex;
+  overflow-x: hidden;
 `;
 
 export const NewsDetailsWrapper = styled.div`
@@ -16,6 +17,9 @@ export const NewsDetailsWrapper = styled.div`
   width: 100%;
   align-items: center;
   margin-bottom: 40px;
+  @media screen and (max-width: 480px) {
+    /* width: 90%; */
+  }
 `;
 
 export const NewsDetailsContent = styled.div`
@@ -24,18 +28,31 @@ export const NewsDetailsContent = styled.div`
   width: 100%;
   max-width: 1000px;
   margin-bottom: 80px;
+
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+    width: 90%;
+    margin-bottom: 40px;
+  }
 `;
 
 export const NewsDetailsImage = styled.img`
   height: 300px;
   width: 450px;
-  object-fit: fill; 
+  object-fit: cover;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    margin-bottom: 20px;
+  }
 `;
 
 export const NewsDetailsInfo = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 40px;
+  @media screen and (max-width: 480px) {
+    margin-left: 0;
+  }
 `;
 
 export const NewsTitle = styled.h2`
@@ -46,6 +63,9 @@ export const NewsTitle = styled.h2`
 export const Headings = styled.h1`
   color: darkred;
   text-transform: uppercase;
+  @media screen and (max-width: 480px) {
+    font-size: 24px;
+  }
 `;
 
 export const PublisherDetails = styled.div`
@@ -79,6 +99,9 @@ export const ArticleTitle = styled.div`
   h2 {
     border-bottom: 1px solid #ddd;
   }
+  @media screen and (max-width: 480px) {
+    width: 90%;
+  }
 `;
 
 export const Article = styled.article`
@@ -86,4 +109,7 @@ export const Article = styled.article`
   padding-top: 10px;
   text-align: justify;
   width: 80%;
+  @media screen and (max-width: 480px) {
+    width: 90%;
+  }
 `;

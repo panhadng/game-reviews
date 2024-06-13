@@ -14,6 +14,7 @@ export const NewsContainer = styled.div`
   width: 100%;
   color: white;
   padding-bottom: 80px;
+  overflow-x: hidden;
 `;
 
 export const NewsItem = styled(LinkR)`
@@ -23,12 +24,18 @@ export const NewsItem = styled(LinkR)`
   display: flex;
   flex-direction: row;
   text-decoration: none;
+  @media screen and (max-width: 480px) {
+    width: 90%;
+  }
 `;
 
 export const Headline = styled.h2`
   font-size: 1.5em;
   color: darkred;
   margin: 0;
+  @media screen and (max-width: 480px) {
+    font-size: 1.2em;
+  }
 `;
 
 export const ImageBox = styled.div`
@@ -49,10 +56,16 @@ export const Thumbnail = styled.img`
 export const NewsContent = styled.div`
   width: 100%;
   padding-left: 40px;
+  @media screen and (max-width: 480px) {
+    padding-left: 20px;
+  }
 `;
 
 export const Subtitle = styled.p`
   color: white;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
 
 export const ClicksContainer = styled.div`
@@ -80,6 +93,9 @@ export const JournalistDate = styled.p`
   }
   .date {
     color: grey;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.8em;
   }
 `;
 

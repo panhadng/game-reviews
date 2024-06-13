@@ -22,4 +22,8 @@ export const Button = styled(LinkR)`
     background: ${({ primary }) => (primary ? "white" : "darkred")};
     color: ${({ dark }) => (dark ? "darkred" : "white")};
   }
+
+  @media screen and (max-width: 480px) {
+    font-size: 14px;
+  }
 `;

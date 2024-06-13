@@ -19,6 +19,10 @@ export const AddReviewWrapper = styled.div`
   border-radius: 8px;
   background-color: #1e1e1e;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+  @media screen and (max-width: 480px) {
+    width: 90%;
+  }
 `;
 
 export const AddReviewForm = styled.form`

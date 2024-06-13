@@ -7,6 +7,10 @@ export const InfoContainer = styled.div`
   @media screen and (max-width: 768px) {
     padding: 100px 0;
   }
+
+  @media screen and (max-width: 480px) {
+    padding: 50px 0;
+  }
 `;
 
 export const InfoWrapper = styled.div`
@@ -77,6 +81,10 @@ export const Subtitle = styled.p`
   font-size: 18px;
   line-height: 24px;
   color: ${({ darkText }) => (darkText ? "black" : "gray")};
+
+  @media screen and (max-width: 480px) {
+    font-size: 14px;
+  }
 `;
 
 export const BtnWrap = styled.div`
@@ -93,4 +101,8 @@ export const Img = styled.img`
   width: 100%;
   margin: 0 0 10px 0;
   padding-right: 0;
+
+  @media screen and (max-width: 480px) {
+    margin-top: 20px;
+  }
 `;

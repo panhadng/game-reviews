@@ -11,6 +11,7 @@ import {
 } from "./SideBarElements";
 import { useNavigate } from "react-router-dom";
 import AxiosInstance from "../Axios";
+import ProfileMenu from "../NavBar/ProfileMenu";
 
 const SideBar = ({ toggle, isOpen }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -44,28 +45,25 @@ const SideBar = ({ toggle, isOpen }) => {
   }, []);
 
   return (
-    <SideBarContainer isOpen={isOpen} onClick={toggle}>
+    <SideBarContainer isOpen={isOpen} >
       <Icon onClick={toggle}>
         <CloseIcon />
       </Icon>
       <SideBarWrapper>
         <SideBarMenu>
-          <SideBarLink to="games" onClick={toggle}>
+          <SideBarLink to="/games" onClick={toggle}>
             Games
           </SideBarLink>
-          <SideBarLink to="reviews" onClick={toggle}>
+          <SideBarLink to="/reviews" onClick={toggle}>
             Reviews
           </SideBarLink>
-          <SideBarLink to="news" onClick={toggle}>
+          <SideBarLink to="/news" onClick={toggle}>
             News
           </SideBarLink>
         </SideBarMenu>
         <SideBtnWrap>
           {isLoggedIn ? (
-            <SideBarRoute to="/" onClick={handleLogout}>
-              <i className="fas fa-sign-out-alt"></i>
-              <span style={{ marginLeft: "8px" }}>{user}</span>
-            </SideBarRoute>
+            <ProfileMenu user={user} handleLogout={handleLogout} />
           ) : (
             <SideBarRoute to="/login">Login</SideBarRoute>
           )}

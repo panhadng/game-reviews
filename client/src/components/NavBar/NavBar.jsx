@@ -108,7 +108,7 @@ const NavBar = ({ toggle }) => {
                 <ProfileMenu user={user} handleLogout={handleLogout} />
               ) : (
                 <NavBtnLink to="/login">Login</NavBtnLink>
-              )}
+              )} 
             </NavBtn>
           </NavBarContainer>
         </Nav>

@@ -10,6 +10,7 @@ export const AddNewsContainer = styled.div`
   min-height: 90vh;
   width: 100%;
   padding-bottom: 80px;
+  overflow-x: hidden;
 `;
 
 export const AddNewsWrapper = styled.div`
@@ -19,6 +20,9 @@ export const AddNewsWrapper = styled.div`
   border-radius: 8px;
   background-color: #1e1e1e;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  @media screen and (max-width: 480px) {
+    width: 90%;
+  }
 `;
 
 export const AddNewsForm = styled.form`

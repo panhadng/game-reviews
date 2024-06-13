@@ -76,7 +76,7 @@ export const HeroP = styled.p`
   }
 
   @media screen and (max-width: 480px) {
-    font-size: 12px;
+    font-size: 14px;
   }
 `;
 

@@ -4,8 +4,8 @@ import { Link as LinkR } from "react-router-dom";
 export const ReviewsContainer = styled.div`
   margin-top: -80px;
   padding-top: 120px;
-  background: black;
   padding-bottom: 80px;
+  background: black;
   height: auto;
   min-height: 90vh;
   display: flex;
@@ -14,11 +14,15 @@ export const ReviewsContainer = styled.div`
   align-items: center;
   width: 100%;
   color: white;
+  overflow-x: hidden;
 `;
 
 export const Headings = styled.h1`
   color: darkred;
   text-transform: uppercase;
+  @media screen and (max-width: 480px) {
+    font-size: 24px;
+  }
 `;
 
 export const ReviewItem = styled(LinkR)`
@@ -29,11 +33,19 @@ export const ReviewItem = styled(LinkR)`
   display: flex;
   flex-direction: row;
   text-decoration: none;
+
+  @media screen and (max-width: 480px) {
+    width: 90%;
+    padding: 5px;
+  }
 `;
 
 export const ReviewContent = styled.div`
   width: 100%;
   padding-left: 40px;
+  @media screen and (max-width: 480px) {
+    padding-left: 15px;
+  }
 `;
 
 export const GameImage = styled.img`
@@ -42,12 +54,20 @@ export const GameImage = styled.img`
   margin-bottom: 10px;
   border-radius: 5px;
   object-fit: cover;
+
+  @media screen and (max-width: 480px) {
+    max-width: 125px;
+    max-height: 125px;
+  }
 `;
 
 export const GameTitle = styled.h2`
   font-size: 1.5em;
   color: white;
   margin: 0;
+  @media screen and (max-width: 480px) {
+    font-size: 1.2em;
+  }
 `;
 
 export const UserDate = styled.p`
@@ -77,6 +97,11 @@ export const DescriptionContainer = styled.div`
   text-overflow: ellipsis;
   line-height: 1.5em;
   max-height: 3.5em;
+
+  @media screen and (max-width: 480px) {
+    font-size: 12px;
+    max-height: 4.2em;
+  }
 `;
 
 export const LikesContainer = styled.div`

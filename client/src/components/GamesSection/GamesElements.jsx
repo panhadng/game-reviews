@@ -14,11 +14,18 @@ export const GamesContainer = styled.div`
   align-items: center;
   width: 100%;
   color: white;
+
+  @media (max-width: 480px) {
+    padding-bottom: 0;
+  }
 `;
 
 export const Headings = styled.h1`
   color: darkred;
   text-transform: uppercase;
+  @media (max-width: 480px) {
+    font-size: 24px;
+  }
 `;
 
 export const GameGrid = styled.div`
@@ -28,6 +35,13 @@ export const GameGrid = styled.div`
   padding: 20px;
   width: 80%;
   height: 100%;
+
+  @media screen and (max-width: 480px) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    padding: 20px 0;
+    width: 90%;
+  }
 `;
 
 export const GameCard = styled(LinkR)`
@@ -46,6 +60,9 @@ export const GameCard = styled(LinkR)`
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   }
+  @media screen and (max-width: 480px) {
+    padding: 0;
+  }
 `;
 
 export const GameImage = styled.img`
@@ -56,9 +73,9 @@ export const GameImage = styled.img`
   max-width: 100%;
   max-height: 100%;
 
-  /* Responsive adjustments */
-  @media (max-width: 250px) {
-    width: 100%;
+  @media (max-width: 480px) {
+    width: 125px;
+    height: 125px;
   }
 `;
 
@@ -68,6 +85,10 @@ export const GameTitle = styled.h3`
   text-align: center;
   font-weight: normal;
   color: white;
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+  }
 `;
 
 export const SearchBar = styled.input`
@@ -89,6 +110,10 @@ export const FilterBar = styled.div`
   position: relative;
   padding: 10px;
   margin-bottom: 10px;
+  @media screen and (max-width: 480px) {
+    width: 90%;
+    padding: 5px;
+  }
 `;
 
 export const AddNewBar = styled(LinkR)`
@@ -133,6 +158,10 @@ export const DropdownButton = styled.button`
   }
   &:not(:last-child) {
     border-bottom: 1px solid #ddd;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 12px;
   }
 `;
 
