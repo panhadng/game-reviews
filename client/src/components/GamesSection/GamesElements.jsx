@@ -6,8 +6,8 @@ export const GamesContainer = styled.div`
   padding-top: 120px;
   background: black;
   padding-bottom: 80px;
-  height: auto;
   min-height: 90vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -27,6 +27,7 @@ export const GameGrid = styled.div`
   grid-gap: 20px;
   padding: 20px;
   width: 80%;
+  height: 100%;
 `;
 
 export const GameCard = styled(LinkR)`
@@ -36,6 +37,7 @@ export const GameCard = styled(LinkR)`
   padding: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   height: 100%;
+  width: 100%;
   transition: transform 0.3s, box-shadow 0.3s;
   text-decoration: none;
 
