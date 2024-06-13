@@ -8,7 +8,7 @@ The Game Reviews Website is a platform designed for gaming enthusiasts to explor
 The project stands out by offering a unique combination of features tailored specifically to the gaming community. While incorporating elements of social interaction such as user reviews and news articles, it goes beyond simple social networking and e-commerce. The project's complexity lies in its multifaceted nature, integrating both frontend and backend technologies, user authentication, and extensive CRUD operations.
 
 ### Technologies Used
-- **ReactJS**: Leveraged for the frontend to create dynamic and interactive user interfaces. The use of components enhances modularity and scalability, while libraries like React Router DOM facilitate seamless navigation between pages.
+- **React.js**: Leveraged for the frontend to create dynamic and interactive user interfaces. The use of components enhances modularity and scalability, while libraries like React Router DOM facilitate seamless navigation between pages.
 - **Django with Django Rest Framework**: Employed for the backend to handle data modeling, API creation, and authentication. Django Rest Framework simplifies the creation of RESTful APIs, ensuring smooth communication between the frontend and backend.
 - **Styled Components**: Utilized for styling in React components, promoting encapsulation and reusability. Styled Components support dynamic styling based on props, enhancing the user experience with responsive design.
 - **React Scroll**: Integrated to enable smooth scrolling within the application, improving navigation and user engagement.
@@ -21,9 +21,10 @@ The project stands out by offering a unique combination of features tailored spe
 
 ## Implementation Details
 ### Frontend
-- **Components**: React components are organized into reusable elements, promoting modularity and maintainability. Each component has its own `elements.jsx` file for styling, ensuring separation of concerns and improved code organization.
+- **Components**: React components are organized into reusable elements, promoting modularity and maintainability. Each component has its own `ComponentsElements.jsx` file for styling, ensuring separation of concerns and improved code organization.
 - **Pages**: The website consists of a single-page application (SPA) structure where multiple components are utilized to compose different sections of the page. React Router DOM enables navigation between different sections seamlessly.
 - **React Scroll**: Implemented to enhance user experience by enabling smooth scrolling within the application, improving accessibility and navigation.
+- **Benefits of React Components**: React components offer several advantages over traditional HTML/CSS and JavaScript. They encapsulate both structure and behavior, allowing for easier code maintenance and reusability. Components can have their own state, enabling dynamic updates without reloading the entire page. Additionally, React's virtual DOM ensures efficient rendering, resulting in better performance.
 
 ### Backend
 - **Django Models**: Used to define data models for games, reviews, users, and news articles, ensuring structured data storage and retrieval.
