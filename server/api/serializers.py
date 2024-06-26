@@ -1,61 +1,67 @@
-from .models import News, Review
 from rest_framework import serializers
 from .models import *
+from django.forms import ValidationError
+from django.contrib.auth import get_user_model, authenticate
 
 
-# News Serializer
+# auth serializers
+UserModel = get_user_model()
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserModel
+        fields = ('username', 'user_id')
+
+
+class UserRegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserModel
+        fields = "__all__"
+
+    def create(self, clean_data):
+        user_obj = UserModel.objects.create_user(
+            username=clean_data['username'],
+            password=clean_data['password']
+        )
+        user_obj.save()
+        return user_obj
+
+
+class UserLoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
+
+    def check_user(self, clean_data):
+        user = authenticate(
+            username=clean_data['username'],
+            password=clean_data['password'],
+        )
+        if not user:
+            raise ValidationError('user not found')
+        return user
+
+
+# app serializers
 class NewsSerializer(serializers.ModelSerializer):
     class Meta:
         model = News
         fields = '__all__'
 
 
-# Review Serializer
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = '__all__'
 
 
-# Game Serializer
 class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
         fields = '__all__'
 
 
-# Play List Serializer
 class PlaylistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Playlist
         fields = '__all__'
-
-
-# User Serializer
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'username')
-
-
-# Register Serializer
-class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True)
-    confirm_password = serializers.CharField(
-        write_only=True, label='Confirm password')
-
-    class Meta:
-        model = User
-        fields = ('username', 'password', 'confirm_password')
-
-    def validate(self, data):
-        if data['password'] != data['confirm_password']:
-            raise serializers.ValidationError("Passwords do not match.")
-        return data
-
-    def create(self, validated_data):
-        user = User.objects.create_user(
-            username=validated_data['username'],
-            password=validated_data['password']
-        )
-        return user

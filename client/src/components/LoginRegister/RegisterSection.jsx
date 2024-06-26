@@ -23,7 +23,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
+  const handleRegister = async (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
@@ -35,8 +35,6 @@ const Register = () => {
         password: password,
         confirm_password: confirmPassword,
       });
-      // Save the authentication token to local storage
-      localStorage.setItem("authToken", response.data.token);
       console.log(response.data);
       navigate("/login");
     } catch (error) {
@@ -56,7 +54,7 @@ const Register = () => {
             Gaming Insights
           </Icon>
           <FormContent>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleRegister}>
               <FormH1>Register an account</FormH1>
               <FormLabel htmlFor="username">Username</FormLabel>
               <FormInput

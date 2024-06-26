@@ -21,7 +21,6 @@ import ProfileMenu from "./ProfileMenu";
 
 const NavBar = ({ toggle }) => {
   const [scrolled, setScrolled] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
@@ -41,29 +40,28 @@ const NavBar = ({ toggle }) => {
   const handleLogout = async (event) => {
     event.preventDefault();
     try {
-      const logout = await AxiosInstance.post("logout");
-      localStorage.removeItem("authToken");
-      localStorage.removeItem("username");
-      localStorage.removeItem("userId");
-      setIsLoggedIn(false);
+      await AxiosInstance.post("logout");
       navigate("/");
+      window.location.reload();
     } catch (error) {
       console.error("There was an error logging out!", error.message);
     }
   };
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const currentUser = localStorage.getItem("username");
-      setUser(currentUser);
+    const fetchData = async () => {
+      try {
+        const currentUser = await AxiosInstance.get("user");
+        setUser(currentUser.data);
+      } catch (error) {
+        console.error(
+          "Error fetching user:",
+          error.response ? error.response.data : error.message
+        );
+      }
     };
 
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      setIsLoggedIn(true);
-    }
-
-    fetchUser();
+    fetchData();
 
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -104,11 +102,11 @@ const NavBar = ({ toggle }) => {
               </NavItem>
             </NavMenu>
             <NavBtn>
-              {isLoggedIn ? (
-                <ProfileMenu user={user} handleLogout={handleLogout} />
+              {user ? (
+                <ProfileMenu user={user.user.username} handleLogout={handleLogout} />
               ) : (
                 <NavBtnLink to="/login">Login</NavBtnLink>
-              )} 
+              )}
             </NavBtn>
           </NavBarContainer>
         </Nav>

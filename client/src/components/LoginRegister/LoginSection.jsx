@@ -15,44 +15,21 @@ import {
 import { LogoImage } from "../NavBar/NavBarElements";
 import Logo from "../../assets/images/casino.png";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  // manage the csrftoken
-  const getCSRFToken = async () => {
-    try {
-      const response = await AxiosInstance.get("csrf");
-      return response.data.csrfToken;
-    } catch (error) {
-      console.error("Failed to fetch CSRF token:", error);
-      throw error;
-    }
-  };
-
-  const handleSubmit = async (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
-
     try {
-      const csrfToken = await getCSRFToken();
-      const response = await AxiosInstance.post(
-        "login",
-        {
-          username: username,
-          password: password,
-        },
-        {
-          headers: {
-            "X-CSRFToken": csrfToken,
-          },
-        }
-      );
-      localStorage.setItem("authToken", response.data.token);
-      localStorage.setItem("username", response.data.username);
-      localStorage.setItem("userId", response.data.user_id);
+      const response = await AxiosInstance.post("login", {
+        username: username,
+        password: password,
+      });
+      console.log(response.data);
       navigate("/");
     } catch (error) {
       console.error(
@@ -71,7 +48,7 @@ const Login = () => {
             Gaming Insights
           </Icon>
           <FormContent>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleLogin}>
               <FormH1>Login to your account</FormH1>
               <FormLabel htmlFor="username">Username</FormLabel>
               <FormInput

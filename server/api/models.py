@@ -1,10 +1,41 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.base_user import BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 
 
-# user authentication
-class User(AbstractUser):
-    pass
+class AppUserManager(BaseUserManager):
+    def create_user(self, username, password=None):
+        if not username:
+            raise ValueError('A username is required.')
+        if not password:
+            raise ValueError('A password is required.')
+        # email = self.normalize_email(email)
+        user = self.model(username=username)
+        user.set_password(password)
+        user.save()
+        return user
+
+    def create_superuser(self, username, password=None):
+        if not username:
+            raise ValueError('A username is required.')
+        if not password:
+            raise ValueError('A password is required.')
+        user = self.create_user(username, password)
+        user.is_superuser = True
+        user.is_staff = True
+        user.save()
+        return user
+
+
+class AppUser(AbstractBaseUser, PermissionsMixin):
+    user_id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=50, unique=True)
+    USERNAME_FIELD = 'username'
+    # REQUIRED_FIELDS = ['email']
+    objects = AppUserManager()
+
+    def __str__(self):
+        return self.username
 
 
 class Game(models.Model):
@@ -27,7 +58,7 @@ class Game(models.Model):
 class Playlist(models.Model):
     game = models.ForeignKey(
         Game, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
     add_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -35,7 +66,7 @@ class Playlist(models.Model):
 
 
 class Review(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
     game = models.ForeignKey(
         Game, on_delete=models.CASCADE)
     published_date = models.DateTimeField(auto_now_add=True)

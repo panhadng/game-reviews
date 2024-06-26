@@ -1,88 +1,59 @@
-from django.middleware.csrf import get_token
+from django.contrib.auth import login, logout
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.authtoken.models import Token
-from django.contrib.auth import authenticate, login, logout
-from django.http import Http404, JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.db import IntegrityError
+from django.http import Http404
 from .models import *
 from .serializers import *
-import json
+from .validations import custom_validation, validate_username, validate_password
 
 
-# Login view
-@csrf_exempt
-def login_view(request):
-    if request.method == "POST":
-        data = json.loads(request.body.decode("utf-8"))
-        username = data.get("username")
-        password = data.get("password")
+class UserRegister(APIView):
+    permission_classes = (permissions.AllowAny,)
 
-        if username and password:
-            user = authenticate(request, username=username, password=password)
-
-            if user is not None:
-                login(request, user)
-                token, _ = Token.objects.get_or_create(user=user)
-                return JsonResponse({
-                    "message": "Login successful.",
-                    "user_id": user.pk,
-                    "username": user.username,
-                    "token": token.key
-                })
-            else:
-                return JsonResponse({"error": "Invalid username and/or password."}, status=400)
-        else:
-            return JsonResponse({"error": "Username and password are required."}, status=400)
-    else:
-        return JsonResponse({"error": "Only POST requests are allowed."}, status=405)
+    def post(self, request):
+        clean_data = custom_validation(request.data)
+        serializer = UserRegisterSerializer(data=clean_data)
+        if serializer.is_valid(raise_exception=True):
+            user = serializer.create(clean_data)
+            if user:
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-# Logout View
-@csrf_exempt
-def logout_view(request):
-    if request.method == "POST":
+class UserLogin(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (SessionAuthentication,)
+
+    def post(self, request):
+        data = request.data
+        assert validate_username(data)
+        assert validate_password(data)
+        serializer = UserLoginSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            user = serializer.check_user(data)
+            login(request, user)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class UserLogout(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()
+
+    def post(self, request):
         logout(request)
-        return JsonResponse({"message": "Logout successful."})
-    else:
-        return JsonResponse({"error": "Only POST requests are allowed."}, status=405)
+        return Response(status=status.HTTP_200_OK)
 
 
-# Registration View
-@csrf_exempt
-def register(request):
-    if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        confirmation = request.POST.get("confirm_password")
+class UserView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (SessionAuthentication,)
 
-        if password != confirmation:
-            return JsonResponse({"error": "Passwords must match."}, status=400)
-
-        try:
-            user = User.objects.create_user(
-                username=username, password=password)
-        except IntegrityError:
-            return JsonResponse({"error": "Username already taken."}, status=400)
-
-        login(request, user)
-        return JsonResponse({"message": "User created successfully.", "user_id": user.pk, "username": user.username})
-    else:
-        return JsonResponse({"error": "Only POST requests are allowed."}, status=405)
-
-
-# Separate CSRF Token
-def csrf_token(request):
-    csrf_token = get_token(request)
-    return JsonResponse({'csrfToken': csrf_token})
-
-
-# User
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response({'user': serializer.data}, status=status.HTTP_200_OK)
 
 
 # Game ViewSet
@@ -139,8 +110,8 @@ class PlaylistViewSet(viewsets.ModelViewSet):
     def list(self, request):
         user_id = request.query_params.get('user')
         try:
-            user = User.objects.get(id=user_id)
-        except User.DoesNotExist:
+            user = AppUser.objects.get(id=user_id)
+        except AppUser.DoesNotExist:
             return Response(status=status.HTTP_204_NO_CONTENT)
 
         queryset = self.queryset.filter(user=user)
@@ -152,9 +123,9 @@ class PlaylistViewSet(viewsets.ModelViewSet):
         game_id = request.data.get('game')
 
         try:
-            user = User.objects.get(id=user_id)
+            user = AppUser.objects.get(id=user_id)
             game = Game.objects.get(id=game_id)
-        except User.DoesNotExist:
+        except AppUser.DoesNotExist:
             return Response({'error': 'User does not exist'}, status=status.HTTP_400_BAD_REQUEST)
         except Game.DoesNotExist:
             return Response({'error': 'Game does not exist'}, status=status.HTTP_400_BAD_REQUEST)
@@ -175,9 +146,9 @@ class PlaylistViewSet(viewsets.ModelViewSet):
         game_id = request.data.get('game')
 
         try:
-            user = User.objects.get(id=user_id)
+            user = AppUser.objects.get(id=user_id)
             game = Game.objects.get(id=game_id)
-        except User.DoesNotExist:
+        except AppUser.DoesNotExist:
             return Response({'error': 'User does not exist'}, status=status.HTTP_400_BAD_REQUEST)
         except Game.DoesNotExist:
             return Response({'error': 'Game does not exist'}, status=status.HTTP_400_BAD_REQUEST)
