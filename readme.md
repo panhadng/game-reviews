@@ -56,12 +56,38 @@ The `src` folder in the client directory contains the core of the custom files c
 
 To run the application locally:
 
-1. Navigate to the `server` directory and activate the virtual environment.
-2. Install Python dependencies using `pip install -r requirements.txt`.
-3. Run the Django server with `python manage.py runserver`.
-4. Navigate to the `client` directory and install npm dependencies using `npm install`.
-5. Start the React development server with `npm start`.
-6. Access the application in your browser at `http://localhost:3000`.
+1. **Backend**:
+   - Navigate to the `server` directory:
+     ```sh
+     cd server
+     ```
+   - Activate the virtual environment:
+     ```sh
+     source venv/bin/activate
+     ```
+   - Install Python dependencies:
+     ```sh
+     pip install -r requirements.txt
+     ```
+   - Run the Django server:
+     ```sh
+     python manage.py runserver
+     ```
+
+2. **Frontend**:
+   - Open a new terminal and navigate to the `client` directory:
+     ```sh
+     cd client
+     ```
+   - Install npm dependencies:
+     ```sh
+     npm install
+     ```
+   - Start the Vite development server:
+     ```sh
+     npm run dev
+     ```
+   - Access the application in your browser at `http://localhost:3000`.
 
 ## Additional Information
 
