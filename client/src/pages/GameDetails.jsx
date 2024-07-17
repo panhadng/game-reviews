@@ -23,9 +23,9 @@ const Games = () => {
     try {
       // Fetch both game and review data concurrently
       const [games, reviews, users] = await Promise.all([
-        AxiosInstance.get(`game/`),
-        AxiosInstance.get(`review/`),
-        AxiosInstance.get(`user/`),
+        AxiosInstance.get(`game`),
+        AxiosInstance.get(`review`),
+        AxiosInstance.get(`user`),
       ]);
       setGamesData(games.data);
       setReviewsData(reviews.data);

@@ -30,8 +30,8 @@ class AppUserManager(BaseUserManager):
 class AppUser(AbstractBaseUser, PermissionsMixin):
     user_id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=50, unique=True)
+    is_staff = models.BooleanField(default=False)
     USERNAME_FIELD = 'username'
-    # REQUIRED_FIELDS = ['email']
     objects = AppUserManager()
 
     def __str__(self):
