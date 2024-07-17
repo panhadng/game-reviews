@@ -82,9 +82,7 @@ const ReviewsSection = ({ games, reviews, users }) => {
           >
             <GameImage src={game.imageUrl} alt={game.title} />
             <ReviewContent>
-              <GameTitle>
-                {game.title}
-              </GameTitle>
+              <GameTitle>{game.title}</GameTitle>
               <UserDate>
                 <strong>{user.username}</strong> <span>|</span>{" "}
                 {moment(review.date).format("MMM Do, YYYY")}

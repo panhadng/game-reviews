@@ -29,7 +29,8 @@ const Login = () => {
         username: username,
         password: password,
       });
-      console.log(response.data);
+      // console.log(response.data);
+      localStorage.setItem("user", JSON.stringify(response.data));
       navigate("/");
     } catch (error) {
       console.error(

@@ -41,6 +41,7 @@ const NavBar = ({ toggle }) => {
     event.preventDefault();
     try {
       await AxiosInstance.post("logout");
+      localStorage.clear();
       navigate("/");
       window.location.reload();
     } catch (error) {
@@ -51,8 +52,10 @@ const NavBar = ({ toggle }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const currentUser = await AxiosInstance.get("user");
-        setUser(currentUser.data);
+        // const currentUser = await AxiosInstance.get("user");
+        const currentUser = localStorage.getItem("user");
+        // setUser(currentUser.data);
+        setUser(JSON.parse(currentUser));
       } catch (error) {
         console.error(
           "Error fetching user:",
@@ -103,7 +106,7 @@ const NavBar = ({ toggle }) => {
             </NavMenu>
             <NavBtn>
               {user ? (
-                <ProfileMenu user={user.user.username} handleLogout={handleLogout} />
+                <ProfileMenu user={user.username} handleLogout={handleLogout} />
               ) : (
                 <NavBtnLink to="/login">Login</NavBtnLink>
               )}

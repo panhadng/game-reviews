@@ -9,7 +9,6 @@ const usePlaylist = () => {
     const fetchPlaylist = async () => {
       try {
         const userId = parseInt(localStorage.getItem("userId"));
-        console.log(userId);
         const response = await AxiosInstance.get(`playlist`, {
           params: { user: userId },
         });

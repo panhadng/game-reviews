@@ -9,9 +9,11 @@ UserModel = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(source='user_id')
+
     class Meta:
         model = UserModel
-        fields = ('username', 'user_id')
+        fields = ('username', 'id')
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -33,13 +35,30 @@ class UserLoginSerializer(serializers.Serializer):
     password = serializers.CharField()
 
     def check_user(self, clean_data):
-        user = authenticate(
-            username=clean_data['username'],
-            password=clean_data['password'],
-        )
-        if not user:
-            raise ValidationError('user not found')
-        return user
+        username = clean_data.get('username')
+        password = clean_data.get('password')
+
+        if username and password:
+            user = authenticate(username=username, password=password)
+            if user:
+                return user
+            raise ValidationError('Invalid username or password')
+
+        raise ValidationError('Username and password must be provided')
+    
+    
+# class UserLoginSerializer(serializers.Serializer):
+#     username = serializers.CharField()
+#     password = serializers.CharField()
+
+#     def check_user(self, clean_data):
+#         user = authenticate(
+#             username=clean_data['username'],
+#             password=clean_data['password'],
+#         )
+#         if not user:
+#             raise ValidationError('user not found')
+#         return user
 
 
 # app serializers
